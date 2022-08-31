@@ -111,3 +111,13 @@ select {column_name1}*nvl{column_name2,1) from {table_name} :: if column_name2 h
 2. OR : 한 가지 조건이 TRUE → TRUE 반환 (새로운 조건식 명시)
 3. NOT : 부정
 ```
+
+# SQL_MultiCoulumn
+```
+select last_name, employee_id, salary, department_id
+from employees
+where (department_id,salary) in (select department_id, max(salary)
+	from employees
+	group by department_id
+	having department_id is not null)
+```
